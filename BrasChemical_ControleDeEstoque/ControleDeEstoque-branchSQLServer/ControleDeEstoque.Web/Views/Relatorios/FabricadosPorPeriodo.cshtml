@@ -1,0 +1,216 @@
+﻿@{
+    ViewBag.Title = "Relatório Simplificado de Fabricação";
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+}
+@section estilos{
+    <style>
+        .table tr {
+            cursor: pointer;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter input {
+            margin-left: 0px;
+            width: 100%;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter label {
+            display: block;
+        }
+
+        @@media print {
+            .page-header {
+                display: none;
+            }
+
+            .panel-heading {
+                font-weight: bold;
+            }
+
+            .panel-info {
+                border-width: 0px;
+            }
+
+                .panel-info > .panel-heading {
+                    padding: 0px 0px 5px 0px;
+                    margin-bottom: 10px;
+                    font-size: 20px;
+                    border-bottom-color: #ccc;
+                }
+
+            .panel-body {
+                padding: 0px;
+            }
+
+            .table-bordered {
+                border: 0px !important;
+            }
+
+                .table-bordered th {
+                    background-color: #EEE !important;
+                }
+
+            .data-hoje {
+                font-size: 14px;
+                line-height: 36px;
+            }
+
+            .table > tbody > tr > td,
+            .table > thead > tr > th,
+            .table-bordered th, .table-bordered td {
+                padding: 2px;
+            }
+
+
+            /*.table {
+                page-break-inside: auto;
+            }*/
+
+                .table > tbody > tr {
+                    page-break-before: always;
+                    page-break-after: always;
+                    page-break-inside: auto;
+                    border-collapse: collapse !important;
+                }
+
+            .col-print-8 {
+                width: 66.66666667%;
+            }
+
+            .col-print-4 {
+                width: 33.33333333%;
+            }
+        }
+    </style>
+}
+
+
+<div class="row">
+    <div class="col-md-4 hidden-print">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Selecionar Período
+            </div>
+            <div class="panel-body">
+                <div class="form-group input-group">
+                    <input type="text" name="periodo" id="periodo" class="form-control datetime" />
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" onclick="document.getElementById('periodo').focus()" type="button">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="visible-print text-center" style="height: 80px; line-height: 80px; font-size: 22px; margin-bottom: 20px; font-weight: bold; border: 1px solid #ccc; border-radius: 10px;">
+                    Relatório Simplificado de Fabricação de Produtos
+                    <img style="float:right; margin-right: 4px; margin-top: 2px;" src="@Url.Content("~/Content/images/logo.png")" />
+                </div>
+                Período: <span id="titulo-periodo" style="font-weight: bold"></span>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button onclick="window.print();" class="btn btn-outline btn-info hidden-print">Imprimir</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="fabricadoPorPeriodo" class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Relatório de Fabricação de Produtos *@
+@* Período: data  *@
+
+
+@section scripts
+{
+    <script>
+        moment.locale('pt-br');
+        $(document).ready(function () {
+            //console.log(moment().subtract(1, 'month').format('MMMM'));
+            var ultimoMesLabel = moment().subtract(1, 'month').format('MMMM/YYYY');
+            var penultimoMesLabel = moment().subtract(2, 'month').format('MMMM/YYYY');
+
+            var ranges = {};
+            ranges['Hoje'] = [moment(), moment()];
+            ranges['Ontem'] = [moment().subtract(1, 'days'), moment().subtract(1, 'days')];
+            ranges['Este Mês'] = [moment().startOf('month'), moment().endOf('month')],
+            ranges[ultimoMesLabel] = [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')];
+            ranges[penultimoMesLabel] = [moment().subtract(2, 'month').startOf('month'), moment().subtract(2, 'month').endOf('month')];
+
+            $('#periodo').daterangepicker({
+                //"ranges": {
+                //    'Hoje': [moment(), moment()],
+                //    'Ontem': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                //    //'Últimos 7 Dias': [moment().subtract(6, 'days'), moment()],
+                //    //'Últimos 30 Dias': [moment().subtract(29, 'days'), moment()],
+                //    'Este Mês': [moment().startOf('month'), moment().endOf('month')],
+                //    'Último Mês': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')],
+                //    ultimoMesLabel: [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                //},
+                "ranges": ranges,
+                "locale": {
+                    "format": "DD/MM/YYYY",
+                    "separator": " - ",
+                    "applyLabel": "Aplicar",
+                    "cancelLabel": "Cancelar",
+                    "fromLabel": "De",
+                    "toLabel": "Até",
+                    "customRangeLabel": "Personalizado",
+                    "daysOfWeek": [
+                        "Dom",
+                        "Seg",
+                        "Ter",
+                        "Qua",
+                        "Qui",
+                        "Sex",
+                        "Sab"
+                    ],
+                    "monthNames": [
+                        "Janeiro",
+                        "Fevereiro",
+                        "Março",
+                        "Abril",
+                        "Maio",
+                        "Junho",
+                        "Julho",
+                        "Agosto",
+                        "Setembro",
+                        "Outubro",
+                        "Novembro",
+                        "Dezembro"
+                    ],
+                    "firstDay": 1
+                },
+                "startDate": moment(),
+                "endDate": moment()
+            }, function (start, end, label) {
+                $("#fabricadoPorPeriodo").html("");
+                $("#titulo-periodo").html("");
+
+                console.log("New date range selected: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + " (predefined range: " + label + ")");
+
+                if (label.indexOf("/") > 0) {
+                    $("#titulo-periodo").html(label);
+                }
+                else {
+                    $("#titulo-periodo").html(start.format('DD-MM-YYYY') + " a " + end.format('DD-MM-YYYY'));
+                }
+                $("#fabricadoPorPeriodo").load("/Relatorios/FabricadosPorPeriodoPartial", { dataDe: start.format('DD-MM-YYYY'), dataAte: end.format('DD-MM-YYYY') });
+            });
+
+
+        });
+    </script>
+}
+
+@*relatorio detalhado de fabricacao de produtos*@
+

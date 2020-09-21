@@ -1,0 +1,327 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ControleDeEstoque</RootNamespace>
+    <AssemblyName>ControleDeEstoque</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>http://localhost/ControleDeEstoque/</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>96.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.VisualBasic" />
+    <Reference Include="Microsoft.VisualBasic.PowerPacks.Vs, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Configuracao.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DBControleEstoque.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DBControleEstoque.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="frmAtualizarProdutos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAtualizarProdutos.Designer.cs">
+      <DependentUpon>frmAtualizarProdutos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmEntradaRevenda.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmEntradaRevenda.Designer.cs">
+      <DependentUpon>frmEntradaRevenda.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmExpedicao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmExpedicao.Designer.cs">
+      <DependentUpon>frmExpedicao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSetarDiretorio.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSetarDiretorio.Designer.cs">
+      <DependentUpon>frmSetarDiretorio.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Installer1.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Installer1.Designer.cs">
+      <DependentUpon>Installer1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelatorioData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelatorioData.Designer.cs">
+      <DependentUpon>frmFiltroRelatorioData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelatorioDataProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelatorioDataProduto.Designer.cs">
+      <DependentUpon>frmFiltroRelatorioDataProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmPrincipal.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmPrincipal.Designer.cs">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmProducaoLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmProducaoLote.Designer.cs">
+      <DependentUpon>frmProducaoLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorProduto.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorProduto.Designer.cs">
+      <DependentUpon>frmRelExpedicaoPorProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelExpedicaoPorLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\Filtros\frmFiltroRelExpedicaoPorLote.Designer.cs">
+      <DependentUpon>frmFiltroRelExpedicaoPorLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorData.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorData.Designer.cs">
+      <DependentUpon>frmRelExpedicaoPorData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorLote.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelatoriosForms\frmRelExpedicaoPorLote.Designer.cs">
+      <DependentUpon>frmRelExpedicaoPorLote.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSenha.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSenha.Designer.cs">
+      <DependentUpon>frmSenha.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="TratamentoLote.cs" />
+    <Compile Include="Util.cs" />
+    <EmbeddedResource Include="DataSet1.resx">
+      <DependentUpon>DataSet1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAtualizarProdutos.resx">
+      <DependentUpon>frmAtualizarProdutos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmEntradaRevenda.resx">
+      <DependentUpon>frmEntradaRevenda.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmExpedicao.resx">
+      <DependentUpon>frmExpedicao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSetarDiretorio.resx">
+      <DependentUpon>frmSetarDiretorio.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Installer1.resx">
+      <DependentUpon>Installer1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\Filtros\frmFiltroRelatorioData.resx">
+      <DependentUpon>frmFiltroRelatorioData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\Filtros\frmFiltroRelatorioDataProduto.resx">
+      <DependentUpon>frmFiltroRelatorioDataProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmPrincipal.resx">
+      <DependentUpon>frmPrincipal.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmProducaoLote.resx">
+      <DependentUpon>frmProducaoLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\frmRelExpedicaoPorProduto.resx">
+      <DependentUpon>frmRelExpedicaoPorProduto.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\Filtros\frmFiltroRelExpedicaoPorLote.resx">
+      <DependentUpon>frmFiltroRelExpedicaoPorLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\frmRelExpedicaoPorData.resx">
+      <DependentUpon>frmRelExpedicaoPorData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelatoriosForms\frmRelExpedicaoPorLote.resx">
+      <DependentUpon>frmRelExpedicaoPorLote.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSenha.resx">
+      <DependentUpon>frmSenha.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="Relatorios\relExpedicaoPorData.rdlc" />
+    <EmbeddedResource Include="Relatorios\relExpedicaoPorLote.rdlc" />
+    <EmbeddedResource Include="Relatorios\relExpedicaoPorProduto.rdlc" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="DBControleEstoque.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DBControleEstoque.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="96.ico" />
+    <Content Include="BancodeDados\ControleDeEstoque.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="ControleDeEstoque.mdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\96.ico" />
+    <None Include="Resources\Quimica.bmp" />
+    <None Include="Resources\Sprinter.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\PB\PB.csproj">
+      <Project>{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}</Project>
+      <Name>PB</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4 Client Profile %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

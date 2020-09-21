@@ -1,0 +1,91 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.OrdemFabricacao>
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Produção";
+}
+@section estilos{
+    <style>
+        .table tr{
+            cursor:pointer;
+        }
+        div.dataTables_filter {
+            display: none;
+        }
+    </style>
+}
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Selecionar Lote
+            </div>
+            <div class="panel-body">
+                <div class="dataTable_wrapper">
+                    <table class="table  table-bordered table-hover" id="tabela">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LoteID)
+                                </th>
+                                <th>
+                                    Produto
+                                </th>
+                                <th>
+                                    Ordem de Fabricação
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LoteID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.PreProduto.Nome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Data)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Selecionar", "Create", "Estoque", new { LoteID = item.LoteID }, new { })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+           // var table = $('#tabela').DataTable();
+
+            $('#tabela tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('warning')) {
+                    $(this).removeClass('warning');
+                }
+                else {
+                    $('tr.warning').removeClass('warning');
+                    $(this).addClass('warning');
+                    $(this).find("td a")[0].click();
+                }
+            });
+
+            $('#button').click(function () {
+                table.row('.warning').remove().draw(false);
+            });
+        });
+    </script>
+}

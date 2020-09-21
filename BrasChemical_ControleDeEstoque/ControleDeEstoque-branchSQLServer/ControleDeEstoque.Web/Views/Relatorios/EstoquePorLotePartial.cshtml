@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.Estoque>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabelaHistoricow">
+        <thead>
+            <tr>
+                <th>
+                    Data Produção
+                </th>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Quantidade Produzida
+                </th>
+                <th>
+                    Quantidade Disponível
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @item.OrdemFabricacao.DataProducao.Value.ToShortDateString()
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto.Nome)
+                    </td>
+                    <td>
+                        @item.QuantidadeProduzida
+                    </td>
+                    <td>
+                        @item.QuantidadeDisponivel
+                    </td>
+                </tr>
+            }
+    </table>
+</div>

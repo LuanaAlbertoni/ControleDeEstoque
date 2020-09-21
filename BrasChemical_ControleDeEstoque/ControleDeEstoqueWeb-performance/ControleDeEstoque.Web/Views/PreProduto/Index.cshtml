@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.PreProduto>
+
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Pre Produtos";
+}
+
+
+<div id="addbutton" class="col-sm-6 text-right"> <a class="btn btn-outline btn-primary" href="@Url.Action("Create")">Adicionar Novo</a></div>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabela">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Sigla)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Sigla)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Editar", "Edit", new { id = item.PreProdutoID }) |
+                        @Html.ActionLink("Excluir", "Delete", new { id = item.PreProdutoID })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- /.table-responsive -->

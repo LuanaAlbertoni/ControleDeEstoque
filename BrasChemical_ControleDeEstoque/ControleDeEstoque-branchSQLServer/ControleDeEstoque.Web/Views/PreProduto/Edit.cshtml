@@ -1,0 +1,40 @@
+﻿@model ControleDeEstoque.Web.Models.PreProduto
+
+@{
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+
+    ViewBag.Title = "Pre Produtos";
+    ViewBag.Action = String.Concat("Editar ", Model.Nome);
+
+}
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.PreProdutoID)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.EditorFor(model => model.Nome, "teste", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Nome)
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Sigla, new { @class = "control-label col-md-2" })
+            <div class="col-md-2">
+                @Html.EditorFor(model => model.Sigla)
+                @Html.ValidationMessageFor(model => model.Sigla)
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Salvar" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}

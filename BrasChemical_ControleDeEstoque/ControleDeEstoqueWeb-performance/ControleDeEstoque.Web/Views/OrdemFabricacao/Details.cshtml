@@ -1,0 +1,50 @@
+﻿@model ControleDeEstoque.Web.Models.OrdemFabricacao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>OrdemFabricacao</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.PreProduto.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PreProduto.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Envasado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Envasado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DataProducao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DataProducao)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.LoteID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

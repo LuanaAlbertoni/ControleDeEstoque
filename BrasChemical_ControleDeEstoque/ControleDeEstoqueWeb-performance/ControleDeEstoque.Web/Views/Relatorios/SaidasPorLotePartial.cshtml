@@ -1,0 +1,39 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.Expedicao>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabelaHistoricow">
+        <thead>
+            <tr>
+                <th>
+                    Data Expedição
+                </th>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Quantidade
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var produtos in Model.OrderByDescending(x => x.Data).GroupBy(x => x.Data.ToShortDateString()))
+            {
+                var data = produtos.Key;
+                foreach (var item in produtos.GroupBy(x => x.Estoque.Produto.Nome))
+                {
+                    <tr>
+                        <td>
+                            @data
+                        </td>
+                        <td>
+                            @item.Key
+                        </td>
+                        <td>
+                            @item.Sum(x => x.Quantidade)
+                        </td>
+                    </tr>
+                }
+
+            }
+    </table>
+</div>

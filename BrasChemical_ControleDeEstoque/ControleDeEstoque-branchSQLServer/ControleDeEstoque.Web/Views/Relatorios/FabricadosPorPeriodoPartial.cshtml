@@ -1,0 +1,36 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.OrdemFabricacao>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabelaHistoricow">
+        <thead>
+
+            <tr>
+                <th >
+                    Data
+                </th>
+                <th >
+                    Lote
+                </th>
+                <th >
+                    Pre Produto
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.OrderBy(x => x.DataProducao))
+            {
+                <tr>
+                    <td>
+                        @item.DataProducao.Value.ToShortDateString()
+                    </td>
+                    <td>
+                        @item.LoteID
+                    </td>
+                    <td>
+                        @item.PreProduto.Nome
+                    </td>
+                    
+                </tr>
+            }
+    </table>
+</div>

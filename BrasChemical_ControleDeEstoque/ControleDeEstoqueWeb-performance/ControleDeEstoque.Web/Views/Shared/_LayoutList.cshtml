@@ -1,0 +1,100 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section estilos{
+    <style>
+        div#dataTables-example_length {
+            display: none;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter {
+            text-align: left;
+        }
+
+        .dataTables_info{
+            font-size: 10px;
+        }
+        .dataTables_paginate {
+            font-size: 11px;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter input
+        {
+            margin-left: 0px;
+            margin-right: 20px;
+        }
+        div.dataTables_wrapper div.dataTables_processing {
+            border-radius: 5px;
+            background: #337ab7;
+            color: white;
+        }
+    </style>
+    @RenderSection("estilos", required: false)
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">@ViewBag.Title</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        @RenderBody()
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+@section scripts{
+    <script type="text/javascript">
+        $.extend(true, $.fn.dataTable.defaults, {
+            "language": {
+                "sEmptyTable": "Nenhum registro encontrado",
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sInfoEmpty": "Mostrando 0 até 0 de 0 registros",
+                "sInfoFiltered": "(Filtrados de _MAX_ registros)",
+                "sInfoPostFix": "",
+                "sInfoThousands": ".",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sLoadingRecords": "Carregando...",
+                "sProcessing": "Processando...",
+                "sZeroRecords": "Nenhum registro encontrado",
+                "sSearch": "",
+                "oPaginate": {
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLast": "Último"
+                },
+                "oAria": {
+                    "sSortAscending": ": Ordenar colunas de forma ascendente",
+                    "sSortDescending": ": Ordenar colunas de forma descendente"
+                }
+            }
+        });
+
+        $(document).ready(function () {
+
+            var order = [[ 1, "asc"]];
+
+            if ($('#tabela th.order-desc').length > 0)
+            {
+                var indice = $('#tabela th.order-desc').index();
+                order = [[indice, "desc"]];
+            }
+
+            $('#tabela').DataTable({
+                responsive: true,
+                "order": order
+            });
+
+            $(".dataTables_length").parent().remove();
+
+            $("#addbutton a").insertAfter($(".dataTables_filter input"));
+
+            $('.dataTables_filter input').attr("placeholder", "Pesquisar")
+            $("input[type=search]").focus();
+        });
+    </script>
+    @RenderSection("scripts", required: false)
+}   

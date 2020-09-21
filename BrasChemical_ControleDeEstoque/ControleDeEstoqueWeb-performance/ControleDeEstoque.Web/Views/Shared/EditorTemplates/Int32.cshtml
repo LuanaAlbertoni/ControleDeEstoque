@@ -1,0 +1,23 @@
+﻿@model Int32?
+
+@{
+    var value = "";
+    var max = "1000";
+    var min = "0";
+    
+    if (Model.HasValue)
+    {
+        value = Model.Value.ToString();
+    }
+
+    if (ViewData["max"] != null)
+    {
+        max = (String)ViewData["max"];
+    }
+
+    if (ViewData["min"] != null)
+    {
+        min = (String)ViewData["min"];
+    }
+}
+<input type="number" name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@value" max="@max" min="min" class="form-control  />

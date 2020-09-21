@@ -1,0 +1,33 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.Estoque>
+
+@foreach (var item in Model.GroupBy(x => x.LoteID))
+{
+    <div class="dataTable_wrapper page-break">
+        <h4>@item.Key - @item.First().Produto.PreProduto.Nome - @item.First().OrdemFabricacao.DataProducao.Value.ToShortDateString()</h4>
+        <table class="table table-striped table-bordered table-hover" id="tabelaHistoricow">
+            <thead>
+                
+                <tr>
+                    <th class="col-md-8 col-print-8">
+                        Produto
+                    </th>
+                    <th class="col-md-4 col-print-4">
+                        Quantidade Produzida
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var subitem in item)
+                {
+                    <tr>
+                        <td>
+                            @subitem.Produto.Nome
+                        </td>
+                        <td>
+                            @subitem.QuantidadeProduzida
+                        </td>
+                    </tr>
+                }
+        </table>
+    </div>
+}

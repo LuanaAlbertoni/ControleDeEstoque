@@ -1,0 +1,39 @@
+﻿@model ControleDeEstoque.Web.Models.PreProduto
+
+@{
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+
+    ViewBag.Title = "Pre Produtos";
+    ViewBag.Action = "Excluir Pré Produto?";
+
+}
+<div>
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Sigla)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Sigla)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Excluir" class="btn btn-default" /> |
+        </div>
+    }
+</div>

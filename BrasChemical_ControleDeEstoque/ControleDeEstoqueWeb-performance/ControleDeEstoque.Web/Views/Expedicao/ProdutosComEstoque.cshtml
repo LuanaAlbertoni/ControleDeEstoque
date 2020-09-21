@@ -1,0 +1,75 @@
+﻿@model IEnumerable<ModelViewProdutoComEstoque>
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Expedição Lista";
+    var count = 0;
+}
+
+
+
+<div class="row">
+    <div class="col-md-9">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Preencher quantidades de Saída
+            </div>
+            <div class="panel-body">
+                <form action="@Url.Action("Create", "Expedicao")" method="post">
+                    <div class="dataTable_wrapper">
+                        @Html.AntiForgeryToken()
+                        <table class="table table-striped table-bordered table-hover" id="tabelaExpedicao">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Produto
+                                    </th>
+                                    <th>
+                                        Lote
+                                    </th>
+                                    <th style="width: 100px">
+                                        Expedição <span class="small">(Em estoque)</span>
+
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderByDescending(x => x.ProdutoLitros).OrderBy(x => x.ProdutoNome))
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ProdutoNome)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LoteID)
+                                    </td>
+                                    <td class="col-md-3">
+                                        <input type="hidden" name="Expedicao[@count].ProdutoID" value="@item.ProdutoID" />
+                                        <input type="hidden" name="Expedicao[@count].ProdutoNome" value="@item.ProdutoNome" />
+                                        <input type="hidden" name="Expedicao[@count].LoteID" value="@item.LoteID" />
+                                        <input type="hidden" name="Expedicao[@count].QuantidadeDisponivel" value="@item.QuantidadeDisponivel" />
+                                        <input type="number" name="Expedicao[@count].QuantidadeExpedida" value="@item.QuantidadeExpedida" max="@item.QuantidadeDisponivel" step="1" min="0" class="form-control" style="width: 85px;     display: inline-block;" />
+                                        <span class="small"> (@Html.DisplayFor(modelItem => item.QuantidadeDisponivel))</span>
+                                    </td>
+                                </tr>
+
+                                    count++;
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.table-responsive -->
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" value="Salvar" class="btn btn-block btn-outline btn-info" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+    </div>
+</div>

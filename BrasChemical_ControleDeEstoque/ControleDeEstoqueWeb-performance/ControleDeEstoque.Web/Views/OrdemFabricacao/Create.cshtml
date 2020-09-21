@@ -1,0 +1,49 @@
+﻿@model ControleDeEstoque.Web.Models.OrdemFabricacao
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+
+    ViewBag.Title = "Ordem de Fabricação";
+    ViewBag.Action = "Nova Ordem de Fabricação";
+
+}
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.LoteID, "Lote", new { @class = "control-label col-md-3" })
+        <div class="col-md-9" style=" padding-top:7px; font-weight:bold">
+            @Html.HiddenFor(model => model.LoteID)
+            @Html.DisplayFor(model => model.LoteID)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PreProdutoID, "Pre Produto", new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.PreProdutoID, "BootstrapSelect", new { selectList = ViewBag.PreProdutoID })
+            @Html.ValidationMessageFor(model => model.PreProdutoID)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Data, new { @class = "control-label col-md-3" })
+        <div class="col-md-3">
+            @Html.EditorFor(model => model.Data)
+            @Html.ValidationMessageFor(model => model.Data)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <input type="submit" value="Gerar" class="btn btn-default" />
+        </div>
+    </div>
+}

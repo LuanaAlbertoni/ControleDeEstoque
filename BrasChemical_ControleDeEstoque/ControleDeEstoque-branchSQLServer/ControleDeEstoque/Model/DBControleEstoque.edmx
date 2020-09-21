@@ -1,0 +1,368 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBControleEstoque.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="DBControleEstoqueStoreContainer">
+    <EntitySet Name="PreProdutos" EntityType="DBControleEstoque.Store.PreProdutos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Produtos" EntityType="DBControleEstoque.Store.Produtos" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Estoque" EntityType="DBControleEstoque.Store.Estoque" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Expedicao" EntityType="DBControleEstoque.Store.Expedicao" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="OrdemFabricacao" EntityType="DBControleEstoque.Store.OrdemFabricacao" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="PreProdutoProduto" Association="DBControleEstoque.Store.PreProdutoProduto">
+      <End Role="PreProduto" EntitySet="PreProdutos" />
+      <End Role="Produto" EntitySet="Produtos" />
+    </AssociationSet>
+    <AssociationSet Name="ProdutoEstoque" Association="DBControleEstoque.Store.ProdutoEstoque">
+      <End Role="Produto" EntitySet="Produtos" />
+      <End Role="Estoque" EntitySet="Estoque" />
+    </AssociationSet>
+    <AssociationSet Name="EstoqueExpedicao" Association="DBControleEstoque.Store.EstoqueExpedicao">
+      <End Role="Estoque" EntitySet="Estoque" />
+      <End Role="Expedicao" EntitySet="Expedicao" />
+    </AssociationSet>
+    <AssociationSet Name="PreProdutoOrdemFabricacao" Association="DBControleEstoque.Store.PreProdutoOrdemFabricacao">
+      <End Role="PreProduto" EntitySet="PreProdutos" />
+      <End Role="OrdemFabricacao" EntitySet="OrdemFabricacao" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="PreProdutos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="Sigla" Type="nvarchar" Nullable="false" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Produtos">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Nome" Type="nvarchar" Nullable="false" MaxLength="60" />
+    <Property Name="Litros" Type="int" Nullable="false" />
+    <Property Name="Revenda" Type="bit" Nullable="true" />
+    <Property Name="PreProdutoId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Estoque">
+    <Key>
+      <PropertyRef Name="Lote" />
+      <PropertyRef Name="ProdutoId" />
+    </Key>
+    <Property Name="Lote" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="ProdutoId" Type="int" Nullable="false" />
+    <Property Name="QuantidadeProduzida" Type="int" Nullable="false" DefaultValue="0" />
+    <Property Name="QuantidadeDisponivel" Type="int" Nullable="false" DefaultValue="0" />
+  </EntityType>
+  <EntityType Name="Expedicao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EstoqueLote" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="EstoqueProdutoId" Type="int" Nullable="false" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+    <Property Name="Quantidade" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="OrdemFabricacao">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Lote" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Lote" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="PreProdutoId" Type="int" Nullable="false" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+    <Property Name="Envasado" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="DataProducao" Type="datetime" Nullable="true" />
+  </EntityType>
+  <Association Name="PreProdutoProduto">
+    <End Role="PreProduto" Type="DBControleEstoque.Store.PreProdutos" Multiplicity="1" />
+    <End Role="Produto" Type="DBControleEstoque.Store.Produtos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PreProduto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Produto">
+        <PropertyRef Name="PreProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ProdutoEstoque">
+    <End Role="Produto" Type="DBControleEstoque.Store.Produtos" Multiplicity="1" />
+    <End Role="Estoque" Type="DBControleEstoque.Store.Estoque" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Produto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Estoque">
+        <PropertyRef Name="ProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="EstoqueExpedicao">
+    <End Role="Estoque" Type="DBControleEstoque.Store.Estoque" Multiplicity="1" />
+    <End Role="Expedicao" Type="DBControleEstoque.Store.Expedicao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Estoque">
+        <PropertyRef Name="Lote" />
+        <PropertyRef Name="ProdutoId" />
+      </Principal>
+      <Dependent Role="Expedicao">
+        <PropertyRef Name="EstoqueLote" />
+        <PropertyRef Name="EstoqueProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="PreProdutoOrdemFabricacao">
+    <End Role="PreProduto" Type="DBControleEstoque.Store.PreProdutos" Multiplicity="1" />
+    <End Role="OrdemFabricacao" Type="DBControleEstoque.Store.OrdemFabricacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PreProduto">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OrdemFabricacao">
+        <PropertyRef Name="PreProdutoId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBControleEstoque" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2009/11/edm" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="DBControleEstoqueContainer" annotation:LazyLoadingEnabled="true" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+          <EntitySet Name="PreProdutos" EntityType="DBControleEstoque.PreProduto" />
+          <EntitySet Name="Produtos" EntityType="DBControleEstoque.Produto" />
+          <AssociationSet Name="PreProdutoProduto" Association="DBControleEstoque.PreProdutoProduto">
+            <End Role="PreProduto" EntitySet="PreProdutos" />
+            <End Role="Produto" EntitySet="Produtos" />
+          </AssociationSet>
+          <EntitySet Name="Estoque" EntityType="DBControleEstoque.Estoque" />
+          <AssociationSet Name="ProdutoEstoque" Association="DBControleEstoque.ProdutoEstoque">
+            <End Role="Produto" EntitySet="Produtos" />
+            <End Role="Estoque" EntitySet="Estoque" />
+          </AssociationSet>
+          <EntitySet Name="Expedicao" EntityType="DBControleEstoque.Expedicao" />
+          <AssociationSet Name="EstoqueExpedicao" Association="DBControleEstoque.EstoqueExpedicao">
+            <End Role="Estoque" EntitySet="Estoque" />
+            <End Role="Expedicao" EntitySet="Expedicao" />
+          </AssociationSet>
+          <EntitySet Name="OrdemFabricacao" EntityType="DBControleEstoque.OrdemFabricacao" />
+          <AssociationSet Name="PreProdutoOrdemFabricacao" Association="DBControleEstoque.PreProdutoOrdemFabricacao">
+            <End Role="PreProduto" EntitySet="PreProdutos" />
+            <End Role="OrdemFabricacao" EntitySet="OrdemFabricacao" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="PreProduto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Type="String" Name="Sigla" Nullable="false" MaxLength="10" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Produtos" Relationship="DBControleEstoque.PreProdutoProduto" FromRole="PreProduto" ToRole="Produto" />
+          <NavigationProperty Name="OrdensFabricacao" Relationship="DBControleEstoque.PreProdutoOrdemFabricacao" FromRole="PreProduto" ToRole="OrdemFabricacao" />
+        </EntityType>
+        <EntityType Name="Produto">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Type="String" Name="Nome" Nullable="false" MaxLength="60" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="Litros" Nullable="false" />
+          <Property Type="Boolean" Name="Revenda" Nullable="true" />
+          <NavigationProperty Name="PreProduto" Relationship="DBControleEstoque.PreProdutoProduto" FromRole="Produto" ToRole="PreProduto" />
+          <Property Type="Int32" Name="PreProdutoId" Nullable="false" />
+          <NavigationProperty Name="Estoque" Relationship="DBControleEstoque.ProdutoEstoque" FromRole="Produto" ToRole="Estoque" />
+        </EntityType>
+        <Association Name="PreProdutoProduto">
+          <End Type="DBControleEstoque.PreProduto" Role="PreProduto" Multiplicity="1" />
+          <End Type="DBControleEstoque.Produto" Role="Produto" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreProduto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Produto">
+              <PropertyRef Name="PreProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Estoque">
+          <Key>
+            <PropertyRef Name="Lote" />
+            <PropertyRef Name="ProdutoId" />
+          </Key>
+          <Property Type="String" Name="Lote" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Produto" Relationship="DBControleEstoque.ProdutoEstoque" FromRole="Estoque" ToRole="Produto" />
+          <Property Type="Int32" Name="ProdutoId" Nullable="false" />
+          <Property Type="Int32" Name="QuantidadeProduzida" Nullable="false" DefaultValue="0" />
+          <Property Name="QuantidadeDisponivel" Type="Int32" Nullable="false" DefaultValue="0" />
+          <NavigationProperty Name="Expedicao" Relationship="DBControleEstoque.EstoqueExpedicao" FromRole="Estoque" ToRole="Expedicao" />
+        </EntityType>
+        <Association Name="ProdutoEstoque">
+          <End Type="DBControleEstoque.Produto" Role="Produto" Multiplicity="1" />
+          <End Type="DBControleEstoque.Estoque" Role="Estoque" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Produto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Estoque">
+              <PropertyRef Name="ProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Expedicao">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" Type="Int32" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <NavigationProperty Name="Estoque" Relationship="DBControleEstoque.EstoqueExpedicao" FromRole="Expedicao" ToRole="Estoque" />
+          <Property Type="String" Name="EstoqueLote" Nullable="false" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Type="Int32" Name="EstoqueProdutoId" Nullable="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Quantidade" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="EstoqueExpedicao">
+          <End Type="DBControleEstoque.Estoque" Role="Estoque" Multiplicity="1" />
+          <End Type="DBControleEstoque.Expedicao" Role="Expedicao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Estoque">
+              <PropertyRef Name="Lote" />
+              <PropertyRef Name="ProdutoId" />
+            </Principal>
+            <Dependent Role="Expedicao">
+              <PropertyRef Name="EstoqueLote" />
+              <PropertyRef Name="EstoqueProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="OrdemFabricacao">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="Lote" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="PreProduto" Relationship="DBControleEstoque.PreProdutoOrdemFabricacao" FromRole="OrdemFabricacao" ToRole="PreProduto" />
+          <Property Name="Lote" Type="String" Nullable="false" MaxLength="20" />
+          <Property Name="PreProdutoId" Type="Int32" Nullable="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Envasado" Type="Boolean" Nullable="false" DefaultValue="false" />
+          <Property Name="DataProducao" Type="DateTime" Nullable="true" />
+        </EntityType>
+        <Association Name="PreProdutoOrdemFabricacao">
+          <End Type="DBControleEstoque.PreProduto" Role="PreProduto" Multiplicity="1" />
+          <End Type="DBControleEstoque.OrdemFabricacao" Role="OrdemFabricacao" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PreProduto">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrdemFabricacao">
+              <PropertyRef Name="PreProdutoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBControleEstoqueStoreContainer" CdmEntityContainer="DBControleEstoqueContainer">
+    <EntitySetMapping Name="PreProdutos">
+      <EntityTypeMapping TypeName="IsTypeOf(DBControleEstoque.PreProduto)">
+        <MappingFragment StoreEntitySet="PreProdutos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Sigla" ColumnName="Sigla" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Produtos">
+      <EntityTypeMapping TypeName="IsTypeOf(DBControleEstoque.Produto)">
+        <MappingFragment StoreEntitySet="Produtos">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
+          <ScalarProperty Name="Litros" ColumnName="Litros" />
+          <ScalarProperty Name="Revenda" ColumnName="Revenda" />
+          <ScalarProperty Name="PreProdutoId" ColumnName="PreProdutoId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estoque">
+      <EntityTypeMapping TypeName="IsTypeOf(DBControleEstoque.Estoque)">
+        <MappingFragment StoreEntitySet="Estoque">
+          <ScalarProperty Name="Lote" ColumnName="Lote" />
+          <ScalarProperty Name="ProdutoId" ColumnName="ProdutoId" />
+          <ScalarProperty Name="QuantidadeProduzida" ColumnName="QuantidadeProduzida" />
+          <ScalarProperty Name="QuantidadeDisponivel" ColumnName="QuantidadeDisponivel" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expedicao">
+      <EntityTypeMapping TypeName="IsTypeOf(DBControleEstoque.Expedicao)">
+        <MappingFragment StoreEntitySet="Expedicao">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="EstoqueLote" ColumnName="EstoqueLote" />
+          <ScalarProperty Name="EstoqueProdutoId" ColumnName="EstoqueProdutoId" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Quantidade" ColumnName="Quantidade" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdemFabricacao">
+      <EntityTypeMapping TypeName="IsTypeOf(DBControleEstoque.OrdemFabricacao)">
+        <MappingFragment StoreEntitySet="OrdemFabricacao">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Lote" ColumnName="Lote" />
+          <ScalarProperty Name="PreProdutoId" ColumnName="PreProdutoId" />
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Envasado" ColumnName="Envasado" />
+          <ScalarProperty Name="DataProducao" ColumnName="DataProducao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <edmx:DesignerInfoPropertySet>
+        <edmx:DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <edmx:DesignerProperty Name="EnablePluralization" Value="False" />
+        <edmx:DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <edmx:DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <edmx:DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </edmx:DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <edmx:Diagram Name="DBControleEstoque" DisplayType="true">
+        <edmx:EntityTypeShape EntityType="DBControleEstoque.PreProduto" Width="1.5" PointX="0.5" PointY="3.75" Height="2.1725878906249996" />
+        <edmx:EntityTypeShape EntityType="DBControleEstoque.Produto" Width="1.5" PointX="3" PointY="3.75" Height="2.3648893229166656" />
+        <edmx:AssociationConnector Association="DBControleEstoque.PreProdutoProduto">
+          <edmx:ConnectorPoint PointX="2" PointY="3.0862939453125" />
+          <edmx:ConnectorPoint PointX="2.5" PointY="3.0862939453125" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="DBControleEstoque.Estoque" Width="2.125" PointX="5.625" PointY="3.75" Height="1.787985026041667" IsExpanded="true" />
+        <edmx:AssociationConnector Association="DBControleEstoque.ProdutoEstoque">
+          <edmx:ConnectorPoint PointX="4" PointY="3.1439925130208337" />
+          <edmx:ConnectorPoint PointX="5.25" PointY="3.1439925130208337" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="DBControleEstoque.Expedicao" PointX="8.75" PointY="3.75" Width="3" Height="1.5956835937499996" />
+        <edmx:AssociationConnector Association="DBControleEstoque.EstoqueExpedicao">
+          <edmx:ConnectorPoint PointX="6.5" PointY="4.422587890625" />
+          <edmx:ConnectorPoint PointX="6.5" PointY="5" />
+        </edmx:AssociationConnector>
+        <edmx:EntityTypeShape EntityType="DBControleEstoque.OrdemFabricacao" Width="1.75" PointX="0.5" PointY="0.5" />
+        <edmx:AssociationConnector Association="DBControleEstoque.PreProdutoOrdemFabricacao" />
+      </edmx:Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

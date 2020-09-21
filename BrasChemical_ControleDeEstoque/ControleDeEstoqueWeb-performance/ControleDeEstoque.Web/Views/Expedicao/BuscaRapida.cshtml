@@ -1,0 +1,211 @@
+﻿@model IEnumerable<ModelViewProdutoComEstoque>
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Expedição - Busca Rápida";
+    var count = 0;
+}
+@section estilos{
+    <style>
+        .table > tbody > tr > td {
+            vertical-align: middle;
+        }
+
+        #ultimasExpedicoes .table>tbody>tr>td{
+            padding: 1px;
+        }
+    </style>
+}
+@section scripts{
+    <script>
+        function paddy(n, p, c) {
+            var pad_char = typeof c !== 'undefined' ? c : '0';
+            var pad = new Array(1 + p).join(pad_char);
+            return (pad + n).slice(-pad.length);
+        }
+
+        function filtrarPorLote() {
+            //var padrao = "BC16-" + paddy($(this).val(), 4);
+            var padrao = paddy($('#filtro').val(), 4);
+            console.log(padrao);
+
+            //Limpa todos os inputs e oculta
+            $("tr[lote*=" + padrao + "] input[type=number]").val("");
+            $("tr[lote]").addClass("hidden");
+
+            //Exibe os que contém o padrão
+            $("tr[lote*=" + padrao + "]").removeClass("hidden");
+
+            $("tr[lote*=" + padrao + "] input[type=number]").first().focus();
+
+            $("#idListaLote").html(padrao);
+        }
+
+        $(document).ready(function () {
+            $("#filtro").focus();
+
+            //prefixo-lote
+            $("#btn-buscar-lote").click(function () {
+                filtrarPorLote();
+            });
+
+            $('#filtro').on('keydown', function (e) {
+                if (e.which == 13) {
+                    filtrarPorLote();
+                    e.preventDefault();
+                }
+            });
+
+            $("#frmExpedicao").on('submit', function (e) {
+                if ($("#btnSalvar").val() != "Salvar") {
+                    e.preventDefault();
+                    return;
+                }
+
+                var totalExpedidos = 0;
+                $("tr[lote] input[type=number]").not(".hidden").each(function (i, elementoExpedido) {
+
+                    if (elementoExpedido.value > 0) {
+                        totalExpedidos += elementoExpedido.value;
+                    }
+
+                });
+
+                if (totalExpedidos == 0) {
+                    e.preventDefault();
+                }
+                else {
+
+                    console.log("tentando");
+                    $("#btnSalvar").val("Realizando expedição... Aguarde");
+                    //$("tr[lote] input[type=number]").not(".hidden").attr("disabled", "disabled");
+                }
+            });
+
+            $("#ultimasExpedicoes").load("/Expedicao/Ultimas");
+
+        });
+    </script>
+}
+<div class="row">
+    <div class="col-md-12">
+        @if (ViewBag.LoteExpedido != null)
+        {
+            <div class="alert alert-success">
+                Lote <b>@ViewBag.LoteExpedido</b> expedido com sucesso.
+            </div>
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-5">
+        <div class="row">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Número do Lote
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <span style="display:inline-block; color: #808080; font-size:12px">Sem Prefixo:</span>
+                            <div class="form-group input-group">
+                                @*<span class="input-group-addon" style="font-size: 36px;" id="prefixo-lote">BC16-</span>*@
+                                <input type="text" id="filtro" autofocus class="form-control" placeholder="" style="font-size: 36px; height: 51px">
+                                <span class="input-group-btn">
+                                    <button class="btn btn-info" id="btn-buscar-lote" type="button" style="font-size: 26px;" title="buscar">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                            <p class="help-block" style="font-size:12px; text-align: right">Pressione Enter ou clique no botão de lupa</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.table-responsive -->
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Últimas Expedições
+                </div>
+                <div class="panel-body" id="ultimasExpedicoes">
+                    
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-md-7">
+
+        <div class="panel panel-info">
+            <div class="panel-heading">
+
+
+                Lote <b><span id="idListaLote"></span></b>
+            </div>
+            <div class="panel-body">
+                Preencher quantidades de Saída:
+                <br />
+                <form id="frmExpedicao" action="@Url.Action("BuscaRapida", "Expedicao")" method="post">
+                    <div class="dataTable_wrapper">
+                        @Html.AntiForgeryToken()
+                        <table class="table table-striped table-bordered table-hover" id="tabelaExpedicao">
+                            <thead>
+
+                                <tr>
+                                    <th>
+                                        Lote
+                                    </th>
+                                    <th>
+                                        Produto
+                                    </th>
+
+                                    <th style="width: 100px">
+                                        Expedição <span class="small">(Em estoque)</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.OrderByDescending(x => x.ProdutoLitros).OrderByDescending(x => x.LoteID))
+                                {
+                                    <tr lote="@item.LoteID" class="hidden">
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.LoteID)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.ProdutoNome)
+                                        </td>
+
+                                        <td class="col-md-4">
+                                            <input type="hidden" name="Expedicao[@count].ProdutoID" value="@item.ProdutoID" />
+                                            <input type="hidden" name="Expedicao[@count].ProdutoNome" value="@item.ProdutoNome" />
+                                            <input type="hidden" name="Expedicao[@count].LoteID" value="@item.LoteID" />
+                                            <input type="hidden" name="Expedicao[@count].QuantidadeDisponivel" value="@item.QuantidadeDisponivel" />
+                                            <input type="number" name="Expedicao[@count].QuantidadeExpedida" value="" max="@item.QuantidadeDisponivel" step="1" min="0" class="form-control" style="width: 85px;     display: inline-block; " />
+                                            <span class="small"> (@Html.DisplayFor(modelItem => item.QuantidadeDisponivel))</span>
+                                        </td>
+                                    </tr>
+
+                                    count++;
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <!-- /.table-responsive -->
+
+                    <div class="form-group">
+                        <div class="col-md-12">
+                            <input type="submit" id="btnSalvar" value="Salvar" class="btn btn-block btn-outline btn-info" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <!-- /.table-responsive -->
+        </div>
+    </div>
+</div>

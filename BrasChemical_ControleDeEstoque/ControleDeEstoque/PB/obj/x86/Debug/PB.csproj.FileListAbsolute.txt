@@ -1,0 +1,9 @@
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\bin\Debug\PB.exe
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\bin\Debug\PB.pdb
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.csprojAssemblyReference.cache
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.ProgressBar.resources
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.Properties.Resources.resources
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.csproj.GenerateResource.cache
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.csproj.CoreCompileInputs.cache
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.exe
+C:\Users\Luana\Source\Workspaces\BrasChemical_ControleDeEstoque\ControleDeEstoque\PB\obj\x86\Debug\PB.pdb

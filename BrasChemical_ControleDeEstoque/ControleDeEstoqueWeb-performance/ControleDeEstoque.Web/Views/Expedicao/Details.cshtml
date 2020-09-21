@@ -1,0 +1,50 @@
+﻿@model ControleDeEstoque.Web.Models.Expedicao
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expedicao</h4>
+	<hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EstoqueLoteID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstoqueLoteID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EstoqueProdutoID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EstoqueProdutoID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantidade)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExpedicaoID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

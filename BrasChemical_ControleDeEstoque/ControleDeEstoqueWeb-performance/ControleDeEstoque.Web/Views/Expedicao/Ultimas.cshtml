@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.Expedicao>
+
+<table class="table" id="tabelaExpedicao">
+    <thead>
+
+        <tr>
+            <th>
+                Data
+            </th>
+            <th>
+                Lote
+            </th>
+            <th>
+                Produto
+            </th>
+            <th>
+                QTD
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @TimeZoneInfo.ConvertTimeBySystemTimeZoneId(item.Data, TimeZoneInfo.Local.Id, "E. South America Standard Time").ToString("dd/MMM HH:mm")
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.EstoqueLoteID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Estoque.Produto.Nome)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantidade)
+                </td>
+            </tr>
+        }
+
+    </tbody>
+</table>

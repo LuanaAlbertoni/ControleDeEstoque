@@ -1,0 +1,47 @@
+﻿@model ControleDeEstoque.Web.Models.Produto
+
+
+@{
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+
+    ViewBag.Title = "Produtos";
+    ViewBag.Action = "Novo Produto";
+
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.PreProdutoID, "Pre Produto", new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.PreProdutoID, "BootstrapSelect", new { selectList = ViewBag.PreProdutoID })
+            @Html.ValidationMessageFor(model => model.PreProdutoID)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Nome, new { @class = "control-label col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.Nome, new { maxlength = "60" })
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Litros, new { @class = "control-label col-md-3" })
+        <div class="col-md-2">
+            @Html.EditorFor(model => model.Litros, new { max = "500", min = "1" })
+            @Html.ValidationMessageFor(model => model.Litros)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <input type="submit" value="Salvar" class="btn btn-default" />
+        </div>
+    </div>
+}

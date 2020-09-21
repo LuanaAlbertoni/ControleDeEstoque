@@ -1,0 +1,146 @@
+﻿@model IEnumerable<ModelLoteProduto>
+
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Saídas Por Lote";
+}
+@section estilos{
+    <style>
+        .table tr {
+            cursor: pointer;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter input {
+            margin-left: 0px;
+            width: 100%;
+        }
+
+        div.dataTables_wrapper div.dataTables_filter label {
+            display: block;
+        }
+
+        @@media print {
+            .page-header {
+                display: none;
+            }
+
+            .panel-heading {
+                font-weight: bold;
+            }
+
+            .panel-info {
+                border-width: 0px;
+            }
+
+                .panel-info > .panel-heading {
+                    padding: 0px 0px 5px 0px;
+                    margin-bottom: 10px;
+                    font-size: 20px;
+                    border-bottom-color: #ccc;
+                }
+
+            .panel-body {
+                padding: 0px;
+            }
+
+            .table-bordered {
+                border: 0px !important;
+            }
+
+                .table-bordered th {
+                    background-color: #EEE !important;
+                }
+        }
+    </style>
+}
+
+<div class="row">
+    <div class="col-md-4 hidden-print">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                Selecionar Lote
+            </div>
+            <div class="panel-body">
+
+                <div class="dataTable_wrapper">
+                    <table class="table  table-bordered table-hover" id="tabela">
+                        <thead>
+                            <tr>
+                                <th class="order-desc">
+                                    Lote
+                                </th>
+                                <th>
+                                    Produto
+                                </th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr loteID="@item.LoteID">
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LoteID)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nome)
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-8">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="visible-print text-center title-print" style="height: 80px; line-height: 80px; font-size: 22px; margin-bottom: 20px; font-weight: bold; border: 1px solid #ccc; border-radius: 10px;">
+                    Recolhimento de Produtos
+                    <img style="float: right; margin-right: 4px; margin-top: 2px;" src="@Url.Content("~/Content/images/logo.png")" />
+                </div>        Saídas Lote <span id="titulo-lote" style="font-weight: bold"></span>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12 text-right">
+                        <button onclick="window.print();" class="btn btn-outline btn-info hidden-print">Imprimir</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div id="historicoPorLote" class="col-md-12">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script>
+        $(document).ready(function () {
+            // var table = $('#tabela').DataTable();
+            $("#tabela_filter").parent().removeClass('col-sm-6').addClass('col-sm-12');
+
+            $('#tabela tbody').on('click', 'tr', function () {
+                if ($(this).hasClass('warning')) {
+                    $(this).removeClass('warning');
+                }
+                else {
+                    $('tr.warning').removeClass('warning');
+                    $(this).addClass('warning');
+                    $("#titulo-lote").html("");
+                    $("#historicoPorLote").html("");
+
+                    var loteID = $(this).attr("loteID");
+
+                    $("#titulo-lote").html(loteID);
+                    $("#historicoPorLote").load("/Relatorios/SaidasPorLotePartial", { id: loteID });
+                }
+            });
+
+            $("input[type=search]").focus();
+        });
+    </script>
+}

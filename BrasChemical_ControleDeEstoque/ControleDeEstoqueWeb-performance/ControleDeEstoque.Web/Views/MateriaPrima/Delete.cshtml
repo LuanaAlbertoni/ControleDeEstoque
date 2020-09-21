@@ -1,0 +1,71 @@
+﻿@model ControleDeEstoque.Web.Models.MateriaPrima
+
+@{
+    Layout = "~/Views/Shared/_LayoutForm.cshtml";
+
+    ViewBag.Title = "Materias Primas";
+    ViewBag.Action = "Excluir Materia Prima?";
+
+}
+<div>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Nome)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Nome)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CAS)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CAS)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CodigoInterno)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CodigoInterno)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.NCM)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.NCM)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Densidade)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Densidade)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Tipo)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Tipo)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Excluir" class="btn btn-default" /> |
+            </div>
+        }
+    </div>

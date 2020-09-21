@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstoque", "ControleDeEstoque\ControleDeEstoque.csproj", "{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PB", "PB\PB.csproj", "{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}"
+EndProject
+Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{161DAB4B-1C80-4BB4-82D2-E29133D16DCD}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ailin.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ControleDeEstoque\\ControleDeEstoque.csproj
+		SccProjectName1 = ControleDeEstoque
+		SccLocalPath1 = ControleDeEstoque
+		SccProjectUniqueName2 = PB\\PB.csproj
+		SccProjectName2 = PB
+		SccLocalPath2 = PB
+		SccProjectUniqueName3 = Setup\\Setup.vdproj
+		SccProjectName3 = Setup
+		SccLocalPath3 = Setup
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}.Debug|x86.ActiveCfg = Debug|x86
+		{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}.Debug|x86.Build.0 = Debug|x86
+		{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}.Release|x86.ActiveCfg = Release|x86
+		{DF43BD8F-101B-4F5B-B726-3DC98EA52A82}.Release|x86.Build.0 = Release|x86
+		{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}.Debug|x86.ActiveCfg = Debug|x86
+		{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}.Debug|x86.Build.0 = Debug|x86
+		{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}.Release|x86.ActiveCfg = Release|x86
+		{C84FBB4C-EA7A-4BDF-A8C9-0B3AE455DE8D}.Release|x86.Build.0 = Release|x86
+		{161DAB4B-1C80-4BB4-82D2-E29133D16DCD}.Debug|x86.ActiveCfg = Debug
+		{161DAB4B-1C80-4BB4-82D2-E29133D16DCD}.Release|x86.ActiveCfg = Release
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,41 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ControleDeEstoque.Web", "ControleDeEstoque.Web\ControleDeEstoque.Web.csproj", "{A74D95DB-C485-41DB-BB09-9FD40517C65A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{A74D95DB-C485-41DB-BB09-9FD40517C65A}.Release|x86.ActiveCfg = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 2
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://ailin.visualstudio.com/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = ControleDeEstoque.Web\\ControleDeEstoque.Web.csproj
+		SccProjectName1 = ControleDeEstoque.Web
+		SccLocalPath1 = ControleDeEstoque.Web
+	EndGlobalSection
+EndGlobal

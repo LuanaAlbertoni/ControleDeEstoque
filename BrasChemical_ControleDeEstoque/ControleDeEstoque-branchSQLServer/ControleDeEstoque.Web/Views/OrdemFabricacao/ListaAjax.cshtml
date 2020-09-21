@@ -1,0 +1,104 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.OrdemFabricacao>
+
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Ajax - Ordens de Fabricação";
+}
+
+
+<div id="addbutton" class="col-sm-6 text-right"> <a class="btn btn-outline btn-primary" href="@Url.Action("Create")">Gerar Nova Ordem</a></div>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabela_ajax">
+        <thead>
+            <tr>
+                <th class="order-desc">
+                    @Html.DisplayNameFor(model => model.LoteID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.PreProduto.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Data)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Envasado)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.DataProducao)
+                </th>
+                @*  <th></th>*@
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LoteID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.PreProduto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Data)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Envasado)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DataProducao)
+                    </td>
+                    @*<td>
+                            @Html.ActionLink("Edit", "Edit", new { id = item.LoteID }) |
+                            @Html.ActionLink("Delete", "Delete", new { id = item.LoteID })
+                        </td>*@
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+<!-- /.table-responsive -->
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var order = [[1, "asc"]];
+
+            if ($('#tabela_ajax th.order-desc').length > 0) {
+                var indice = $('#tabela_ajax th.order-desc').index();
+                order = [[indice, "desc"]];
+            }
+
+            var table = $('#tabela_ajax').DataTable({
+
+                "processing": true, // for show progress bar
+                "serverSide": true, // for process server side
+                "filter": true, // this is for disable filter (search box)
+                "orderMulti": false, // for disable multiple column at once
+                "pageLength": 10,
+                "ajax": {
+                    "url": "/OrdemFabricacao/LoadData",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "order": order,
+                "columns": [
+                      { "data": "LoteID", "name": "LoteID", "autoWidth": true },
+                      { "data": "Nome", "name": "Nome", "autoWidth": true },
+                      { "data": "Data", "name": "Data", "autoWidth": true },
+                      { "data": "Envasado", "title": "Envasado", "name": "Envasado", "autoWidth": true },
+                      { "data": "DataProducao", "name": "DataProducao", "autoWidth": true }
+                ]
+            });
+
+            $(".dataTables_length").parent().remove();
+
+            $("#addbutton a").insertAfter($(".dataTables_filter input"));
+
+            $('.dataTables_filter input').attr("placeholder", "Pesquisar")
+            $("input[type=search]").focus();
+        });
+    </script>
+}

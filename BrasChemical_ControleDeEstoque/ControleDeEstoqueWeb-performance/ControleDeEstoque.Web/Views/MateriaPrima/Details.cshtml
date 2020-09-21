@@ -1,0 +1,66 @@
+﻿@model ControleDeEstoque.Web.Models.MateriaPrima
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MateriaPrima</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CAS)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CAS)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CodigoInterno)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CodigoInterno)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NCM)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NCM)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Densidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Densidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Tipo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Tipo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.MateriaPrimaID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

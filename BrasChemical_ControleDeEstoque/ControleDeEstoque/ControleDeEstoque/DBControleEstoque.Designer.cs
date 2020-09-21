@@ -1,0 +1,2 @@
+﻿// Seeing this comment implies that the code generation for file 'D:\Users\AILIN\Documents\Visual Studio 2010\Projects\ControleDeEstoque\ControleDeEstoque\DBControleEstoque.edmx'
+// failed. See the ErrorList for details.

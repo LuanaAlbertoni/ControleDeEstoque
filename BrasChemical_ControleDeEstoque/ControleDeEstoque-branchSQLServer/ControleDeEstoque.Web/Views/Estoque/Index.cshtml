@@ -1,0 +1,52 @@
+﻿@model IEnumerable<ControleDeEstoque.Web.Models.Estoque>
+
+@{
+    Layout = "~/Views/Shared/_LayoutList.cshtml";
+    ViewBag.Title = "Estoque";
+}
+
+<div id="addbutton" class="col-sm-6 text-right"> <a class="btn btn-outline btn-primary" href="@Url.Action("SelecionarLote")">Produção</a></div>
+
+<div class="dataTable_wrapper">
+    <table class="table table-striped table-bordered table-hover" id="tabela">
+        <thead>
+
+            <tr>
+                <th class="order-desc">
+                    @Html.DisplayNameFor(model => model.OrdemFabricacao.LoteID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Produto.Nome)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantidadeProduzida)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.QuantidadeDisponivel)
+                </th>
+            </tr>
+            </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrdemFabricacao.LoteID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Produto.Nome)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantidadeProduzida)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.QuantidadeDisponivel)
+                    </td>
+                  
+                </tr>
+            }
+  </tbody>
+
+    </table>
+</div>
+<!-- /.table-responsive -->

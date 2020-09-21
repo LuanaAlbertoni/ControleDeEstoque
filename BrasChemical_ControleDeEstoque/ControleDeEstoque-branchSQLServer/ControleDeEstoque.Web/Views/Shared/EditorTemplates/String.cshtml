@@ -1,0 +1,10 @@
+﻿@model String
+@{
+    var maxlength = "60";
+    
+    if (ViewData["maxlength"] != null)
+    {
+        maxlength = (String)ViewData["maxlength"];
+    }
+}
+<input type="text" name="@ViewData.TemplateInfo.HtmlFieldPrefix" value="@Model"  maxlength="@maxlength" class="form-control" />
